@@ -37,37 +37,37 @@ class User extends Equatable {
 
 class PersonalInfo extends Equatable {
   const PersonalInfo({
-    required this.name,
+    required this.firstName,
     required this.email,
     required this.phoneNumber,
   });
 
-  final String name;
+  final String firstName;
   final String email;
   final String phoneNumber;
 
   factory PersonalInfo.empty() {
     return const PersonalInfo(
-      name: '',
+      firstName: '',
       email: '',
       phoneNumber: '',
     );
   }
 
   PersonalInfo copyWith({
-    String? name,
+    String? firstName,
     String? email,
     String? phoneNumber,
   }) {
     return PersonalInfo(
-      name: name ?? this.name,
+      firstName: firstName ?? this.firstName,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
 
   @override
-  List<Object?> get props => [name, email, phoneNumber];
+  List<Object?> get props => [firstName, email, phoneNumber];
 }
 
 class BillingAddress extends Equatable {
