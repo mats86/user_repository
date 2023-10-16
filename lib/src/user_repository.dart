@@ -9,7 +9,7 @@ class UserRepository {
   }
 
   Future<void> updatePersonalInfo({
-    required String name,
+    required String firstName,
     required String email,
     required String phoneNumber,
   }) async {
@@ -17,7 +17,7 @@ class UserRepository {
     await Future.delayed(const Duration(seconds: 1));
     _user = _user?.copyWith(
       personalInfo:
-      PersonalInfo(name: name, email: email, phoneNumber: phoneNumber),
+      PersonalInfo(firstName: firstName, email: email, phoneNumber: phoneNumber),
     );
   }
 
