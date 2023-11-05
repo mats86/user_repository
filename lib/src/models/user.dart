@@ -2,17 +2,20 @@ import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
   const User({
+    required this.birthDay,
     required this.personalInfo,
     required this.billingAddress,
     required this.payment,
   });
 
+  final BirthDay birthDay;
   final PersonalInfo personalInfo;
   final BillingAddress billingAddress;
   final Payment payment;
 
   factory User.empty() {
     return User(
+      birthDay: BirthDay.empty(),
       personalInfo: PersonalInfo.empty(),
       billingAddress: BillingAddress.empty(),
       payment: Payment.empty(),
@@ -20,11 +23,13 @@ class User extends Equatable {
   }
 
   User copyWith({
+    BirthDay? birthDay,
     PersonalInfo? personalInfo,
     BillingAddress? billingAddress,
     Payment? payment,
   }) {
     return User(
+      birthDay: birthDay ?? this.birthDay,
       personalInfo: personalInfo ?? this.personalInfo,
       billingAddress: billingAddress ?? this.billingAddress,
       payment: payment ?? this.payment,
@@ -35,39 +40,64 @@ class User extends Equatable {
   List<Object?> get props => [personalInfo, billingAddress, payment];
 }
 
+class BirthDay extends Equatable {
+  const BirthDay({
+    required this.birthDay,
+  });
+
+  final String birthDay;
+
+  factory BirthDay.empty() {
+    return const BirthDay(
+      birthDay: '',
+    );
+  }
+
+  BirthDay copyWith({
+    String? birthDay,
+  }) {
+    return BirthDay(
+      birthDay: birthDay ?? this.birthDay,
+    );
+  }
+
+  @override
+  List<Object?> get props => [birthDay];
+}
+
 class PersonalInfo extends Equatable {
   const PersonalInfo({
-    required this.name,
+    required this.firstName,
     required this.email,
     required this.phoneNumber,
   });
 
-  final String name;
+  final String firstName;
   final String email;
   final String phoneNumber;
 
   factory PersonalInfo.empty() {
     return const PersonalInfo(
-      name: '',
+      firstName: '',
       email: '',
       phoneNumber: '',
     );
   }
 
   PersonalInfo copyWith({
-    String? name,
+    String? firstName,
     String? email,
     String? phoneNumber,
   }) {
     return PersonalInfo(
-      name: name ?? this.name,
+      firstName: firstName ?? this.firstName,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
 
   @override
-  List<Object?> get props => [name, email, phoneNumber];
+  List<Object?> get props => [firstName, email, phoneNumber];
 }
 
 class BillingAddress extends Equatable {
