@@ -41,20 +41,21 @@ class User extends Equatable {
 }
 
 class BirthDay extends Equatable {
-  const BirthDay({
-    required this.birthDay,
-  });
+  final DateTime? birthDay;
 
-  final String birthDay;
+  const BirthDay({
+    this.birthDay,
+  });
 
   factory BirthDay.empty() {
     return const BirthDay(
-      birthDay: '',
+      birthDay:
+          null, // Null ist als Platzhalter für "kein Geburtsdatum gesetzt"
     );
   }
 
   BirthDay copyWith({
-    String? birthDay,
+    DateTime? birthDay,
   }) {
     return BirthDay(
       birthDay: birthDay ?? this.birthDay,
