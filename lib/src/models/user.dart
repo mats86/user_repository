@@ -3,41 +3,53 @@ import 'package:equatable/equatable.dart';
 class User extends Equatable {
   const User({
     required this.birthDay,
+    required this.kidsPersonalInfo,
     required this.personalInfo,
-    required this.billingAddress,
-    required this.payment,
+    required this.swimCourseInfo,
+    required this.swimPoolInfo,
   });
 
   final BirthDay birthDay;
+  final KidsPersonalInfo kidsPersonalInfo;
   final PersonalInfo personalInfo;
-  final BillingAddress billingAddress;
-  final Payment payment;
+  final SwimCourseInfo swimCourseInfo;
+  final SwimPoolInfo swimPoolInfo;
 
   factory User.empty() {
     return User(
       birthDay: BirthDay.empty(),
+      kidsPersonalInfo: KidsPersonalInfo.empty(),
       personalInfo: PersonalInfo.empty(),
-      billingAddress: BillingAddress.empty(),
-      payment: Payment.empty(),
+      swimCourseInfo: SwimCourseInfo.empty(),
+      swimPoolInfo: SwimPoolInfo.empty(),
     );
   }
 
   User copyWith({
     BirthDay? birthDay,
+    KidsPersonalInfo? kidsPersonalInfo,
     PersonalInfo? personalInfo,
-    BillingAddress? billingAddress,
-    Payment? payment,
+    SwimCourseInfo? swimCourseInfo,
+    SwimPoolInfo? swimPoolInfo,
   }) {
     return User(
       birthDay: birthDay ?? this.birthDay,
+      kidsPersonalInfo: kidsPersonalInfo ?? this.kidsPersonalInfo,
       personalInfo: personalInfo ?? this.personalInfo,
-      billingAddress: billingAddress ?? this.billingAddress,
-      payment: payment ?? this.payment,
+      swimCourseInfo: swimCourseInfo ?? this.swimCourseInfo,
+      swimPoolInfo: swimPoolInfo ?? this.swimPoolInfo,
     );
   }
 
   @override
-  List<Object?> get props => [personalInfo, billingAddress, payment];
+  List<Object?> get props =>
+      [
+        birthDay,
+        kidsPersonalInfo,
+        personalInfo,
+        swimCourseInfo,
+        swimPoolInfo,
+      ];
 }
 
 class BirthDay extends Equatable {
@@ -50,7 +62,7 @@ class BirthDay extends Equatable {
   factory BirthDay.empty() {
     return const BirthDay(
       birthDay:
-          null, // Null ist als Platzhalter für "kein Geburtsdatum gesetzt"
+      null, // Null ist als Platzhalter für "kein Geburtsdatum gesetzt"
     );
   }
 
@@ -66,122 +78,190 @@ class BirthDay extends Equatable {
   List<Object?> get props => [birthDay];
 }
 
-class PersonalInfo extends Equatable {
-  const PersonalInfo({
+class KidsPersonalInfo extends Equatable {
+  const KidsPersonalInfo({
     required this.firstName,
-    required this.email,
-    required this.phoneNumber,
+    required this.lastName,
   });
 
   final String firstName;
+  final String lastName;
+
+  factory KidsPersonalInfo.empty() {
+    return const KidsPersonalInfo(
+      firstName: '',
+      lastName: '',
+    );
+  }
+
+  KidsPersonalInfo copyWith({
+    String? firstName,
+    String? lastName,
+  }) {
+    return KidsPersonalInfo(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+    );
+  }
+
+  @override
+  List<Object?> get props => [firstName, lastName];
+}
+
+class PersonalInfo extends Equatable {
+  const PersonalInfo({
+    required this.title,
+    required this.firstName,
+    required this.lastName,
+    required this.street,
+    required this.streetNumber,
+    required this.zipCode,
+    required this.city,
+    required this.email,
+    required this.emailConfirm,
+    required this.phoneNumber,
+    required this.phoneNumberConfirm,
+  });
+
+  final String title;
+  final String firstName;
+  final String lastName;
+  final String street;
+  final String streetNumber;
+  final String zipCode;
+  final String city;
   final String email;
+  final String emailConfirm;
   final String phoneNumber;
+  final String phoneNumberConfirm;
 
   factory PersonalInfo.empty() {
     return const PersonalInfo(
+      title: '',
       firstName: '',
+      lastName: '',
+      street: '',
+      streetNumber: '',
+      zipCode: '',
+      city: '',
       email: '',
+      emailConfirm: '',
       phoneNumber: '',
+      phoneNumberConfirm: '',
     );
   }
 
   PersonalInfo copyWith({
+    String? title,
     String? firstName,
+    String? lastName,
+    String? street,
+    String? streetNumber,
+    String? zipCode,
+    String? city,
     String? email,
+    String? emailConfirm,
     String? phoneNumber,
+    String? phoneNumberConfirm,
   }) {
     return PersonalInfo(
+      title: title ?? this.title,
       firstName: firstName ?? this.firstName,
-      email: email ?? this.email,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-    );
-  }
-
-  @override
-  List<Object?> get props => [firstName, email, phoneNumber];
-}
-
-class BillingAddress extends Equatable {
-  const BillingAddress({
-    required this.street,
-    required this.apartment,
-    required this.city,
-    required this.country,
-    required this.postcode,
-  });
-
-  final String street;
-  final String apartment;
-  final String city;
-  final String country;
-  final String postcode;
-
-  factory BillingAddress.empty() {
-    return const BillingAddress(
-      street: '',
-      apartment: '',
-      city: '',
-      country: '',
-      postcode: '',
-    );
-  }
-
-  BillingAddress copyWith({
-    String? street,
-    String? apartment,
-    String? city,
-    String? country,
-    String? postcode,
-  }) {
-    return BillingAddress(
+      lastName: lastName ?? this.lastName,
       street: street ?? this.street,
-      apartment: apartment ?? this.apartment,
+      streetNumber: streetNumber ?? this.streetNumber,
+      zipCode: zipCode ?? this.zipCode,
       city: city ?? this.city,
-      country: country ?? this.country,
-      postcode: postcode ?? this.postcode,
+      email: email ?? this.email,
+      emailConfirm: emailConfirm ?? this.emailConfirm,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      phoneNumberConfirm: phoneNumberConfirm ?? this.phoneNumberConfirm,
     );
   }
 
   @override
-  List<Object?> get props => [street, apartment, city, country, postcode];
+  List<Object?> get props =>
+      [
+        title,
+        firstName,
+        lastName,
+        street,
+        streetNumber,
+        zipCode,
+        city,
+        email,
+        emailConfirm,
+        phoneNumber,
+        phoneNumberConfirm,
+      ];
 }
 
-class Payment extends Equatable {
-  const Payment({
-    required this.cardName,
-    required this.cardNumber,
-    required this.expiryDate,
-    required this.cvvNumber,
+class SwimCourseInfo extends Equatable {
+  const SwimCourseInfo({
+    required this.season,
+    required this.swimCourseID,
+    required this.swimCourseName,
+    required this.swimCoursePrice,
   });
 
-  final String cardName;
-  final String cardNumber;
-  final String expiryDate;
-  final String cvvNumber;
+  final String season;
+  final int swimCourseID;
+  final String swimCourseName;
+  final String swimCoursePrice;
 
-  factory Payment.empty() {
-    return const Payment(
-      cardName: '',
-      cardNumber: '',
-      expiryDate: '',
-      cvvNumber: '',
+  factory SwimCourseInfo.empty() {
+    return const SwimCourseInfo(
+      season: '',
+      swimCourseID: 0,
+      swimCourseName: 'swimCourseName',
+      swimCoursePrice: '',
     );
   }
 
-  Payment copyWith({
-    String? cardName,
-    String? cardNumber,
-    String? expiryDate,
-    String? cvvNumber,
+  SwimCourseInfo copyWith({
+    String? season,
+    int? swimCourseID,
+    String? swimCourseName,
+    String? swimCoursePrice,
   }) {
-    return Payment(
-      cardName: cardName ?? this.cardName,
-      cardNumber: cardNumber ?? this.cardNumber,
-      expiryDate: expiryDate ?? this.expiryDate,
-      cvvNumber: cvvNumber ?? this.cvvNumber,
+    return SwimCourseInfo(
+      season: season ?? this.season,
+      swimCourseID: swimCourseID ?? this.swimCourseID,
+      swimCourseName: swimCourseName ?? this.swimCourseName,
+      swimCoursePrice: swimCoursePrice ?? this.swimCoursePrice,
     );
   }
 
   @override
-  List<Object?> get props => [cardName, cardNumber, expiryDate, cvvNumber];
+  List<Object?> get props =>
+      [season, swimCourseID, swimCourseName, swimCoursePrice];
+}
+
+class SwimPoolInfo extends Equatable {
+  const SwimPoolInfo({
+    required this.swimPoolID,
+    required this.swimPoolName,
+  });
+
+  final int swimPoolID;
+  final String swimPoolName;
+
+  factory SwimPoolInfo.empty() {
+    return const SwimPoolInfo(
+      swimPoolID: 0,
+      swimPoolName: '',
+    );
+  }
+
+  SwimPoolInfo copyWith({
+    int? swimPoolID,
+    String? swimPoolName,
+  }) {
+    return SwimPoolInfo(swimPoolID: swimPoolID ?? this.swimPoolID,
+      swimPoolName: swimPoolName ?? this.swimPoolName,
+    );
+  }
+
+  @override
+  List<Object?> get props => [swimPoolID, swimPoolName];
 }

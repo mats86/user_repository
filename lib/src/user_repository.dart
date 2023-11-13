@@ -16,54 +16,78 @@ class UserRepository {
     _user = _user?.copyWith(birthDay: BirthDay(birthDay: birthDay));
   }
 
-  Future<void> updatePersonalInfo({
+  Future<void> updateKidsPersonalInfo({
     required String firstName,
+    required String lastName,
+  }) async {
+    _user ??= User.empty();
+    await Future.delayed(const Duration(seconds: 1));
+    _user = _user?.copyWith(
+        kidsPersonalInfo: KidsPersonalInfo(
+      firstName: firstName,
+      lastName: lastName,
+    ));
+  }
+
+  Future<void> updatePersonalInfo({
+    required String title,
+    required String firstName,
+    required String lastName,
+    required String street,
+    required String streetNumber,
+    required String zipCode,
+    required String city,
     required String email,
+    required String emailConfirm,
     required String phoneNumber,
+    required String phoneNumberConfirm,
   }) async {
     _user ??= User.empty();
     await Future.delayed(const Duration(seconds: 1));
     _user = _user?.copyWith(
       personalInfo: PersonalInfo(
-          firstName: firstName, email: email, phoneNumber: phoneNumber),
-    );
-  }
-
-  Future<void> updateBillingAddress({
-    required String street,
-    required String apartment,
-    required String city,
-    required String country,
-    required String postcode,
-  }) async {
-    _user ??= User.empty();
-    await Future.delayed(const Duration(seconds: 1));
-    _user = _user?.copyWith(
-      billingAddress: BillingAddress(
+        title: title,
+        firstName: firstName,
+        lastName: lastName,
         street: street,
-        apartment: apartment,
+        streetNumber: streetNumber,
+        zipCode: zipCode,
         city: city,
-        country: country,
-        postcode: postcode,
+        email: email,
+        emailConfirm: emailConfirm,
+        phoneNumber: phoneNumber,
+        phoneNumberConfirm: phoneNumberConfirm,
       ),
     );
   }
 
-  Future<void> updatePayment({
-    required String cardName,
-    required String cardNumber,
-    required String expiryDate,
-    required String cvvNumber,
+  Future<void> updateSwimCourseInfo({
+    required String season,
+    required int swimCourseID,
+    required String swimCourseName,
+    required String swimCoursePrice,
   }) async {
     _user ??= User.empty();
     await Future.delayed(const Duration(seconds: 1));
     _user = _user?.copyWith(
-      payment: Payment(
-        cardName: cardName,
-        cardNumber: cardNumber,
-        expiryDate: expiryDate,
-        cvvNumber: cvvNumber,
-      ),
-    );
+        swimCourseInfo: SwimCourseInfo(
+      season: season,
+      swimCourseID: swimCourseID,
+      swimCourseName: swimCourseName,
+      swimCoursePrice: swimCoursePrice,
+    ));
+  }
+
+  Future<void> updateSwimPoolInfo({
+    required int swimPoolID,
+    required String swimPoolName,
+  }) async {
+    _user ??= User.empty();
+    await Future.delayed(const Duration(seconds: 1));
+    _user = _user?.copyWith(
+        swimPoolInfo: SwimPoolInfo(
+      swimPoolID: swimPoolID,
+      swimPoolName: swimPoolName,
+    ));
   }
 }
