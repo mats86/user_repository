@@ -8,6 +8,23 @@ class UserRepository {
     return _user ?? User.empty();
   }
 
+  Future<void> updateSignupUser({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+  }) async {
+    _user ??= User.empty();
+    await Future.delayed(const Duration(seconds: 1));
+    _user = _user?.copyWith(
+        signupUser: SignupUser(
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    ));
+  }
+
   Future<void> updateBirthDay({
     required DateTime birthDay,
   }) async {

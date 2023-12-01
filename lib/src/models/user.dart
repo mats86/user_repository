@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
   const User({
+    required this.signupUser,
     required this.birthDay,
     required this.kidsPersonalInfo,
     required this.personalInfo,
@@ -9,6 +10,7 @@ class User extends Equatable {
     required this.swimPoolInfo,
   });
 
+  final SignupUser signupUser;
   final BirthDay birthDay;
   final KidsPersonalInfo kidsPersonalInfo;
   final PersonalInfo personalInfo;
@@ -17,6 +19,7 @@ class User extends Equatable {
 
   factory User.empty() {
     return User(
+      signupUser: SignupUser.empty(),
       birthDay: BirthDay.empty(),
       kidsPersonalInfo: KidsPersonalInfo.empty(),
       personalInfo: PersonalInfo.empty(),
@@ -26,6 +29,7 @@ class User extends Equatable {
   }
 
   User copyWith({
+    SignupUser? signupUser,
     BirthDay? birthDay,
     KidsPersonalInfo? kidsPersonalInfo,
     PersonalInfo? personalInfo,
@@ -33,6 +37,7 @@ class User extends Equatable {
     SwimPoolInfo? swimPoolInfo,
   }) {
     return User(
+      signupUser: signupUser ?? this.signupUser,
       birthDay: birthDay ?? this.birthDay,
       kidsPersonalInfo: kidsPersonalInfo ?? this.kidsPersonalInfo,
       personalInfo: personalInfo ?? this.personalInfo,
@@ -44,12 +49,48 @@ class User extends Equatable {
   @override
   List<Object?> get props =>
       [
+        signupUser,
         birthDay,
         kidsPersonalInfo,
         personalInfo,
         swimCourseInfo,
         swimPoolInfo,
       ];
+}
+
+class SignupUser extends Equatable {
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? password;
+
+  const SignupUser({this.firstName, this.lastName, this.email, this.password});
+
+  factory SignupUser.empty() {
+    return const SignupUser(
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    );
+  }
+
+  SignupUser copyWith({
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? password,
+  }) {
+    return SignupUser(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      email: email ?? this.email,
+      password: password ?? this.password,
+    );
+  }
+
+  @override
+  List<Object?> get props => [firstName, lastName, email, password];
 }
 
 class BirthDay extends Equatable {
@@ -257,7 +298,8 @@ class SwimPoolInfo extends Equatable {
     int? swimPoolID,
     String? swimPoolName,
   }) {
-    return SwimPoolInfo(swimPoolID: swimPoolID ?? this.swimPoolID,
+    return SwimPoolInfo(
+      swimPoolID: swimPoolID ?? this.swimPoolID,
       swimPoolName: swimPoolName ?? this.swimPoolName,
     );
   }
