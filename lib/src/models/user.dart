@@ -1,8 +1,11 @@
 import 'package:equatable/equatable.dart';
 
+enum SwimLevelEnum { EINSTIEGERKURS, AUFSTIEGERKURS }
+
 class User extends Equatable {
   const User({
     required this.signupUser,
+    required this.swimLevel,
     required this.birthDay,
     required this.kidsPersonalInfo,
     required this.personalInfo,
@@ -11,6 +14,7 @@ class User extends Equatable {
   });
 
   final SignupUser signupUser;
+  final SwimLevel swimLevel;
   final BirthDay birthDay;
   final KidsPersonalInfo kidsPersonalInfo;
   final PersonalInfo personalInfo;
@@ -20,6 +24,7 @@ class User extends Equatable {
   factory User.empty() {
     return User(
       signupUser: SignupUser.empty(),
+      swimLevel: SwimLevel.empty(),
       birthDay: BirthDay.empty(),
       kidsPersonalInfo: KidsPersonalInfo.empty(),
       personalInfo: PersonalInfo.empty(),
@@ -30,6 +35,7 @@ class User extends Equatable {
 
   User copyWith({
     SignupUser? signupUser,
+    SwimLevel? swimLevel,
     BirthDay? birthDay,
     KidsPersonalInfo? kidsPersonalInfo,
     PersonalInfo? personalInfo,
@@ -38,6 +44,7 @@ class User extends Equatable {
   }) {
     return User(
       signupUser: signupUser ?? this.signupUser,
+      swimLevel: swimLevel ?? this.swimLevel,
       birthDay: birthDay ?? this.birthDay,
       kidsPersonalInfo: kidsPersonalInfo ?? this.kidsPersonalInfo,
       personalInfo: personalInfo ?? this.personalInfo,
@@ -50,6 +57,7 @@ class User extends Equatable {
   List<Object?> get props =>
       [
         signupUser,
+        swimLevel,
         birthDay,
         kidsPersonalInfo,
         personalInfo,
@@ -91,6 +99,30 @@ class SignupUser extends Equatable {
 
   @override
   List<Object?> get props => [firstName, lastName, email, password];
+}
+
+class SwimLevel extends Equatable {
+  final SwimLevelEnum? swimLevel;
+
+  const SwimLevel({
+    this.swimLevel,
+  });
+
+  factory SwimLevel.empty() {
+    return const SwimLevel(
+      swimLevel: SwimLevelEnum.EINSTIEGERKURS,
+    );
+  }
+
+  SwimLevel copyWith({
+    SwimLevelEnum? swimLevel,
+  }) {
+    return SwimLevel(
+      swimLevel: swimLevel ?? this.swimLevel,
+    );
+  }
+  @override
+  List<Object?> get props => [swimLevel];
 }
 
 class BirthDay extends Equatable {

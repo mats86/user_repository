@@ -25,6 +25,14 @@ class UserRepository {
     ));
   }
 
+  Future<void> updateSwimLevel({
+    required SwimLevelEnum swimLevel,
+}) async {
+    _user ??= User.empty();
+    await Future.delayed(const Duration(seconds: 1));
+    _user = _user?.copyWith(swimLevel: SwimLevel(swimLevel: swimLevel));
+  }
+
   Future<void> updateBirthDay({
     required DateTime birthDay,
   }) async {
