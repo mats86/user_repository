@@ -109,10 +109,25 @@ class UserRepository {
   }) async {
     _user ??= User.empty();
     await Future.delayed(const Duration(seconds: 1));
-    _user = _user?.copyWith(
-        swimPoolInfo: SwimPoolInfo(
+
+    var newSwimPoolInfo = SwimPoolInfo(
       swimPoolID: swimPoolID,
       swimPoolName: swimPoolName,
-    ));
+    );
+
+    // Hinzufügen oder Aktualisieren der Schwimmbadinformationen
+    List<SwimPoolInfo> updatedSwimPools = List.from(_user!.swimPools);
+    int index = updatedSwimPools.indexWhere((pool) => pool.swimPoolID == swimPoolID);
+    if (index != -1) {
+      // Aktualisiert ein vorhandenes Schwimmbad
+      updatedSwimPools[index] = newSwimPoolInfo;
+    } else {
+      // Fügt ein neues Schwimmbad hinzu
+      updatedSwimPools.add(newSwimPoolInfo);
+    }
+
+    // Aktualisiert den User mit der neuen Liste von Schwimmbädern
+    _user = _user?.copyWith(swimPools: updatedSwimPools);
   }
+
 }

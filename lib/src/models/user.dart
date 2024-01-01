@@ -10,7 +10,7 @@ class User extends Equatable {
     required this.kidsPersonalInfo,
     required this.personalInfo,
     required this.swimCourseInfo,
-    required this.swimPoolInfo,
+    required this.swimPools,
   });
 
   final SignupUser signupUser;
@@ -19,7 +19,7 @@ class User extends Equatable {
   final KidsPersonalInfo kidsPersonalInfo;
   final PersonalInfo personalInfo;
   final SwimCourseInfo swimCourseInfo;
-  final SwimPoolInfo swimPoolInfo;
+  final List<SwimPoolInfo> swimPools;
 
   factory User.empty() {
     return User(
@@ -29,7 +29,7 @@ class User extends Equatable {
       kidsPersonalInfo: KidsPersonalInfo.empty(),
       personalInfo: PersonalInfo.empty(),
       swimCourseInfo: SwimCourseInfo.empty(),
-      swimPoolInfo: SwimPoolInfo.empty(),
+      swimPools: [SwimPoolInfo.empty()],
     );
   }
 
@@ -40,7 +40,7 @@ class User extends Equatable {
     KidsPersonalInfo? kidsPersonalInfo,
     PersonalInfo? personalInfo,
     SwimCourseInfo? swimCourseInfo,
-    SwimPoolInfo? swimPoolInfo,
+    List<SwimPoolInfo>? swimPools,
   }) {
     return User(
       signupUser: signupUser ?? this.signupUser,
@@ -49,7 +49,7 @@ class User extends Equatable {
       kidsPersonalInfo: kidsPersonalInfo ?? this.kidsPersonalInfo,
       personalInfo: personalInfo ?? this.personalInfo,
       swimCourseInfo: swimCourseInfo ?? this.swimCourseInfo,
-      swimPoolInfo: swimPoolInfo ?? this.swimPoolInfo,
+      swimPools: swimPools ?? this.swimPools,
     );
   }
 
@@ -62,7 +62,7 @@ class User extends Equatable {
         kidsPersonalInfo,
         personalInfo,
         swimCourseInfo,
-        swimPoolInfo,
+        swimPools,
       ];
 }
 
@@ -121,6 +121,13 @@ class SwimLevel extends Equatable {
       swimLevel: swimLevel ?? this.swimLevel,
     );
   }
+
+  String get swimLevelString =>
+      swimLevel
+          ?.toString()
+          .split('.')
+          .last ?? 'Unbekannt';
+
   @override
   List<Object?> get props => [swimLevel];
 }
