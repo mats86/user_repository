@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-enum SwimLevelEnum { NONE, EINSTIEGERKURS, AUFSTIEGERKURS }
+enum SwimLevelEnum { EINSTIEGERKURS, AUFSTIEGERKURS }
 
 class User extends Equatable {
   const User({
